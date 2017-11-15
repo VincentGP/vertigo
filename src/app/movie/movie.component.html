@@ -1,0 +1,6 @@
+<ul *ngFor="let movie of movies | async">
+  <li (click)="getMovie(movie.id)">
+    <strong>{{ movie.data.title}}</strong> (
+    <a href="#" (click)="deleteMovie(movie.id)">delete</a>)
+  </li>
+</ul>

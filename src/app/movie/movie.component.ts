@@ -1,21 +1,20 @@
-import { Movie } from './movie';
-import { MovieComponent } from './movie/movie.component';
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 
+import { Movie } from './movie'
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-movie',
+  templateUrl: './movie.component.html',
+  styleUrls: ['./movie.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
-
-export class AppComponent {
+export class MovieComponent implements OnInit {
 
   // Initialize title
   title: string;
-  
+
   // For retrieving the every movie
   moviesCollection: AngularFirestoreCollection<Movie>;
   movies: any;
@@ -40,15 +39,6 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.moviesCollection = this.db.collection('movies');
-    this.movies = this.moviesCollection.snapshotChanges()
-      .map(actions => {
-        return actions.map(model => {
-          const data = model.payload.doc.data() as Movie;
-          const id = model.payload.doc.id;
-          return { id, data };
-        });
-      });
   }
 
 }
