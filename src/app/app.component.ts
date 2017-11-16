@@ -26,6 +26,10 @@ export class AppComponent {
   movieDocument: AngularFirestoreDocument<Movie>;
   movie: Observable<Movie>;
 
+
+  showSpinner: boolean = true;
+
+
   constructor(private db: AngularFirestore) {}
 
   private addMovie() : void {
@@ -52,6 +56,7 @@ export class AppComponent {
           return { id, data };
         });
       });
+    this.movies.subscribe(() => this.showSpinner = false )
   }
 
 }

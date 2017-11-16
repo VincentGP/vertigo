@@ -7,11 +7,13 @@ import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { MovieComponent } from './movie/movie.component';
+import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MovieComponent
+    MovieComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

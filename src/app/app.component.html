@@ -1,3 +1,5 @@
+<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+
 <ul *ngFor="let movie of movies | async">
   <li (click)="getMovie(movie.id)">
     <strong>{{ movie.data.title}}</strong> (
