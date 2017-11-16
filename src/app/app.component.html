@@ -5,14 +5,35 @@
   </li>
 </ul>
 
-
 <h1>A specific movie:</h1>
 <h3>{{ (movie | async)?.title }}</h3>
 
-<input type="text" [(ngModel)]="title" name="title" placeholder="Title..">
-<input type="submit" value="Add a movie" (click)="addMovie()">
+<form #movieForm="ngForm" (ngSubmit)="addMovie(); movieForm.reset()">
 
+  <div *ngIf="(movieTitle.dirty || movieTitle.touched)">
+    <div *ngIf="!movieForm.value.title">
+      Title is required.
+    </div>
+  </div>
+  <input type="text" name="title" placeholder="Title" required minlength="1" [(ngModel)]="title" #movieTitle="ngModel">
+  
+  <div *ngIf="(movieDirector.dirty || movieDirector.touched)">
+    <div *ngIf="!movieForm.value.director">
+      Director is required.
+    </div>
+  </div>
+  <input type="text" name="director" placeholder="Director" required minlength="1" [(ngModel)]="director" #movieDirector="ngModel">
 
-<hr>
+  <div *ngIf="(movieRuntime.dirty || movieRuntime.touched)">
+    <div *ngIf="!movieForm.value.runtime">
+      Runtime is required.
+    </div>
+    <div *ngIf="!movieRuntime.valid">
+      Runtime must be a number
+    </div>
+  </div>
+  <input type="number" name="runtime" placeholder="Runtime" required minlength="1" [(ngModel)]="runtime" #movieRuntime="ngModel">
 
-<app-movie></app-movie>
+  <button class="pure-button pure-button-primary" type="submit" [disabled]="!movieForm.form.valid">Add movie</button>
+  
+</form>

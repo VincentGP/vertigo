@@ -12,9 +12,11 @@ import { Observable } from 'rxjs/Observable';
 })
 
 export class AppComponent {
-
+  
   // Initialize title
   title: string;
+  director: string;
+  runtime: number;
   
   // For retrieving the every movie
   moviesCollection: AngularFirestoreCollection<Movie>;
@@ -24,17 +26,18 @@ export class AppComponent {
   movieDocument: AngularFirestoreDocument<Movie>;
   movie: Observable<Movie>;
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore) {}
 
+  private addMovie() : void {
+    let id = this.title.replace(/\s+/g, '-').toLowerCase();
+    this.db.collection('movies').doc(id).set({ 'title': this.title, 'director': this.director, 'runtime': this.runtime });
   }
-
-  addMovie() {
-    this.db.collection('movies').doc(this.title).set({ 'title': this.title });
-  }
+  
   getMovie(id) {
     this.movieDocument = this.db.doc('movies/' + id);
     this.movie = this.movieDocument.valueChanges();
   }
+
   deleteMovie(id) {
     this.db.doc('movies/' + id).delete();
   }
