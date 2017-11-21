@@ -1,6 +1,4 @@
-<ul *ngFor="let movie of movies | async">
-  <li (click)="getMovie(movie.id)">
-    <strong>{{ movie.data.title}}</strong> (
-    <a href="#" (click)="deleteMovie(movie.id)">delete</a>)
-  </li>
-</ul>
+<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+<strong *ngIf="!showSpinner">Title: </strong><p>{{ (movie | async)?.title }}</p>
+<strong *ngIf="!showSpinner">Director:</strong><p>{{ (movie | async)?.director }}</p>
+<strong *ngIf="!showSpinner">Runtime:</strong><p>{{ (movie | async)?.runtime }}</p>

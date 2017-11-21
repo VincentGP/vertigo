@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Movie } from '../movie';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-
-import { Movie } from './movie'
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-movie',
@@ -12,33 +12,23 @@ import { Movie } from './movie'
 })
 export class MovieComponent implements OnInit {
 
-  // Initialize title
-  title: string;
-
-  // For retrieving the every movie
-  moviesCollection: AngularFirestoreCollection<Movie>;
-  movies: any;
-
   // For retrieving a single movie
   movieDocument: AngularFirestoreDocument<Movie>;
   movie: Observable<Movie>;
 
-  constructor(private db: AngularFirestore) {
+  id: string;
+  showSpinner: boolean = true;
 
-  }
 
-  addMovie() {
-    this.db.collection('movies').doc(this.title).set({ 'title': this.title });
-  }
-  getMovie(id) {
-    this.movieDocument = this.db.doc('movies/' + id);
-    this.movie = this.movieDocument.valueChanges();
-  }
-  deleteMovie(id) {
-    this.db.doc('movies/' + id).delete();
-  }
+  constructor(private db: AngularFirestore, private route: ActivatedRoute) { 
+    route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+   }
 
   ngOnInit() {
+    this.movieDocument = this.db.doc('movies/' + this.id);
+    this.movie = this.movieDocument.valueChanges();
+    this.movie.subscribe(() => this.showSpinner = false)
   }
-
 }

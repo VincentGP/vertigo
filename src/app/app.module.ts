@@ -6,13 +6,14 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { MovieComponent } from './movie/movie.component';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavigationComponent } from './ui/navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { FooterComponent } from './ui/footer/footer.component';
+import { MovieComponent } from './movie/movie.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -26,13 +27,14 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    MovieComponent,
     LoadingSpinnerComponent,
     MovieListComponent,
     PageNotFoundComponent,
     NavigationComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    FooterComponent,
+    MovieComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,7 @@ const appRoutes: Routes = [
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features,
     RouterModule.forRoot(
       appRoutes,
-      {enableTracing: true}
+      {enableTracing: false}
     )
   ],
   providers: [],

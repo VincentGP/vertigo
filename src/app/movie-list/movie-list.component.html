@@ -1,3 +1,68 @@
-<p>
-  movie-list works!
-</p>
+<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+<div class="columns">
+  <div class="column" *ngFor="let movie of movies | async">
+    <div (click)="navigateToMovie(movie.id)">
+      <h2>{{ movie.data.title}}</h2>
+      <a (click)="deleteMovie(movie.id)">delete</a>
+    </div>
+  </div>
+</div>
+
+<!-- <hr>
+
+<h1>A specific movie:</h1>
+<h3>{{ (movie | async)?.title }}</h3>
+
+<hr> -->
+
+<form #movieForm="ngForm" (ngSubmit)="addMovie(); movieForm.reset()">
+
+  <div class="field">
+    <label class="label">Title</label>
+    <div class="control has-icons-right">
+      <input class="input" type="text" name="title" placeholder="Title" required minlength="1" [(ngModel)]="title" #movieTitle="ngModel">
+      <div *ngIf="(movieTitle.dirty || movieTitle.touched)">
+        <span class="icon is-small is-right">
+          <i *ngIf="!movieForm.value.title" class="fa fa-warning"></i>
+        </span>
+        <p *ngIf="!movieForm.value.title" class="help is-danger">Title is required</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="field">
+    <label class="label">Director</label>
+    <div class="control has-icons-right">
+      <input class="input" type="text" name="director" placeholder="Director" required minlength="1" [(ngModel)]="director" #movieDirector="ngModel">
+      <div *ngIf="(movieDirector.dirty || movieDirector.touched)">
+        <span class="icon is-small is-right">
+          <i *ngIf="!movieForm.value.director" class="fa fa-warning"></i>
+        </span>
+        <p *ngIf="!movieForm.value.director" class="help is-danger">Director is required</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Runtime</label>
+    <div class="control has-icons-right">
+      <input class="input" type="number" name="runtime" placeholder="Runtime" required minlength="1" [(ngModel)]="runtime" #movieRuntime="ngModel">
+      <div *ngIf="(movieRuntime.dirty || movieRuntime.touched)">
+        <span class="icon is-small is-right">
+          <i *ngIf="!movieForm.value.runtime" class="fa fa-warning"></i>
+        </span>
+        <p *ngIf="!movieForm.value.runtime" class="help is-danger">Runtime is required</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <button type="submit" class="button is-link" [disabled]="!movieForm.form.valid">Add movie</button>
+    </div>
+    <div class="control">
+      <button class="button is-text" (click)="resetForm()">Start over</button>
+    </div>
+  </div>
+  
+</form>
