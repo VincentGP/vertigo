@@ -1,3 +1,4 @@
+import { DataService } from './data.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -14,12 +15,14 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './ui/footer/footer.component';
 import { MovieComponent } from './movie/movie.component';
+import { AdminComponent } from './admin/admin.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'movies', component: MovieListComponent },
-  { path: 'movie/:id', component: MovieComponent },
+  { path: 'movies/:id', component: MovieComponent },
+  { path: 'admin', component: AdminComponent },
   { path: '', redirectTo: '/movies', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
@@ -34,7 +37,8 @@ const appRoutes: Routes = [
     HomeComponent,
     AboutComponent,
     FooterComponent,
-    MovieComponent
+    MovieComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -43,10 +47,12 @@ const appRoutes: Routes = [
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features,
     RouterModule.forRoot(
       appRoutes,
-      {enableTracing: false}
+      { enableTracing: false }
     )
   ],
-  providers: [],
+  providers: [
+    DataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

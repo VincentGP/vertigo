@@ -4,14 +4,13 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 
-
 @Component({
-  selector: 'app-movie-list',
-  templateUrl: './movie-list.component.html',
-  styleUrls: ['./movie-list.component.css'],
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class MovieListComponent implements OnInit {
+export class AdminComponent implements OnInit {
 
   // Initialize title
   title: string;
@@ -21,6 +20,10 @@ export class MovieListComponent implements OnInit {
   // For retrieving the every movie
   moviesCollection: AngularFirestoreCollection<Movie>;
   movies: any;
+
+  // For retrieving a single movie
+  movieDocument: AngularFirestoreDocument<Movie>;
+  movie: Observable<Movie>;
 
   showSpinner: boolean = true;
 
@@ -32,8 +35,22 @@ export class MovieListComponent implements OnInit {
     this.db.collection('movies').doc(id).set({ 'title': this.title, 'director': this.director, 'runtime': this.runtime });
   }
 
+  getMovie(id) {
+    this.movieDocument = this.db.doc('movies/' + id);
+    this.movie = this.movieDocument.valueChanges();
+  }
   navigateToMovie(id) {
-    this.router.navigate(['movies/', id]);
+    this.router.navigate(['movie/', id]);
+  }
+
+  deleteMovie(id) {
+    this.db.doc('movies/' + id).delete();
+  }
+
+  resetForm() {
+    this.title = '';
+    this.director = '';
+    this.runtime = null;
   }
 
   ngOnInit() {
@@ -48,4 +65,5 @@ export class MovieListComponent implements OnInit {
       });
     this.movies.subscribe(() => this.showSpinner = false)
   }
+
 }
