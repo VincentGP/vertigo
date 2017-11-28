@@ -1,4 +1,3 @@
-<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
-<strong *ngIf="!showSpinner">Title: </strong><p>{{ (movie | async)?.title }}</p>
-<strong *ngIf="!showSpinner">Director:</strong><p>{{ (movie | async)?.director }}</p>
-<strong *ngIf="!showSpinner">Runtime:</strong><p>{{ (movie | async)?.runtime }}</p>
+<strong>Title: </strong><p>{{ movie.title }}</p>
+<strong>Director:</strong><p>{{ movie.director }}</p>
+<strong>Runtime:</strong><p>{{ movie.runtime }}</p>

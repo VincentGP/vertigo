@@ -12,7 +12,8 @@ export class AboutComponent implements OnInit {
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.data.test();
+    
   }
+  
 
 }

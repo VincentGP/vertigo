@@ -1,6 +1,8 @@
 export class Movie {
-    title: string;
-    cast: string[];
-    director: string;
-    runtime: number
+    public id: string;
+    public title: string;
+    public director: string;
+    public runtime: number;
+
+    constructor() {}
 }

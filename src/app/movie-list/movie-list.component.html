@@ -1,12 +1,5 @@
-<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
-<div class="column" *ngFor="let movie of movies | async">
-  <a (click)="navigateToMovie(movie.id)">{{ movie.data.title }}</a>
+<!-- <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner> -->
+
+<div class="column" *ngFor="let movie of movies">
+  <a (click)="navigateToMovie(movie.id)">{{ movie.title }}</a>
 </div>
-
-
-<!-- <hr>
-
-<h1>A specific movie:</h1>
-<h3>{{ (movie | async)?.title }}</h3>
-
-<hr> -->

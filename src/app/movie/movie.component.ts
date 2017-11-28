@@ -1,7 +1,6 @@
+import { DataService } from './../data.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Movie } from '../movie';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -12,23 +11,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MovieComponent implements OnInit {
 
-  // For retrieving a single movie
-  movieDocument: AngularFirestoreDocument<Movie>;
-  movie: Observable<Movie>;
-
-  id: string;
-  showSpinner: boolean = true;
+  public id: string;
+  public movie: Movie;
 
 
-  constructor(private db: AngularFirestore, private route: ActivatedRoute) { 
+  constructor(private route: ActivatedRoute, private data: DataService) { 
+    // Få id ud fra url'en
     route.params.subscribe(params => {
       this.id = params['id'];
     });
+    // Hent film baseret på id
+    this.movie = data.movies.find(model => model.id === this.id);
+
    }
 
   ngOnInit() {
-    this.movieDocument = this.db.doc('movies/' + this.id);
-    this.movie = this.movieDocument.valueChanges();
-    this.movie.subscribe(() => this.showSpinner = false)
+
   }
 }

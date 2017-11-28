@@ -1,7 +1,6 @@
+import { DataService } from './../data.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Movie } from '../movie';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,58 +11,38 @@ import { Router } from '@angular/router';
 })
 export class AdminComponent implements OnInit {
 
-  // Initialize title
-  title: string;
-  director: string;
-  runtime: number;
+  public title: string;
+  public director: string;
+  public runtime: number;
 
-  // For retrieving the every movie
-  moviesCollection: AngularFirestoreCollection<Movie>;
-  movies: any;
+  public movies: Movie[];
+  public movie: Movie;
 
-  // For retrieving a single movie
-  movieDocument: AngularFirestoreDocument<Movie>;
-  movie: Observable<Movie>;
+  // showSpinner: boolean = false;
 
-  showSpinner: boolean = true;
+  constructor(private router: Router, private data: DataService) {
+    this.movie = new Movie();
+    this.movies = this.data.movies;
+  }
 
-  //Adds the database and router objects
-  constructor(private db: AngularFirestore, private router: Router) { }
-
-  private addMovie(): void {
+  addMovie() {
+    // Create id based on title
     let id = this.title.replace(/\s+/g, '-').toLowerCase();
-    this.db.collection('movies').doc(id).set({ 'title': this.title, 'director': this.director, 'runtime': this.runtime });
+    // Set the values
+    this.movie.id = id;
+    this.movie.title = this.title;
+    this.movie.director = this.director;
+    this.movie.runtime = this.runtime;
+    // Push to our data service
+    this.data.movies.push(this.movie);
   }
 
-  getMovie(id) {
-    this.movieDocument = this.db.doc('movies/' + id);
-    this.movie = this.movieDocument.valueChanges();
-  }
-  navigateToMovie(id) {
-    this.router.navigate(['movie/', id]);
-  }
-
-  deleteMovie(id) {
-    this.db.doc('movies/' + id).delete();
-  }
-
-  resetForm() {
-    this.title = '';
-    this.director = '';
-    this.runtime = null;
+  deleteMovie(movie) {
+    let index = this.movies.findIndex(model => model.id === movie.id);
+    this.movies.splice(index, 1);
   }
 
   ngOnInit() {
-    this.moviesCollection = this.db.collection('movies');
-    this.movies = this.moviesCollection.snapshotChanges()
-      .map(actions => {
-        return actions.map(model => {
-          const data = model.payload.doc.data() as Movie;
-          const id = model.payload.doc.id;
-          return { id, data };
-        });
-      });
-    this.movies.subscribe(() => this.showSpinner = false)
-  }
 
+  }
 }
