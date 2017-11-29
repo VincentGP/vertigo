@@ -6,8 +6,8 @@ import { Movie } from './movie';
 @Injectable()
 export class DataService {
     movies = [
-        { id: 'vertigo', title: 'Vertigo', runtime: 120, director: 'Alfred Hitchcock' },
-        { id: 'con-air', title: 'Con Air', runtime: 120, director: 'Simon West' }
+        { id: 'vertigo', title: 'Vertigo', runtime: 120, director: 'Alfred Hitchcock' } as Movie,
+        { id: 'con-air', title: 'Con Air', runtime: 120, director: 'Simon West' } as Movie
     ];
 
     public test(): void {
