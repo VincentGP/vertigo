@@ -2,6 +2,8 @@
 	<strong>Title: </strong><p>{{ movie.title }}</p>
 	<strong>Director:</strong><p>{{ movie.director }}</p>
 	<strong>Runtime:</strong><p>{{ movie.runtime }}</p>
+	<a [routerLink]="['rating']">See movie rating</a>
+	<router-outlet></router-outlet>
 </div>
 
 <div *ngIf="editMode">

@@ -1,3 +1,4 @@
+import { MovieRatingComponent } from './movie-rating/movie-rating.component';
 import { AuthGuard } from './auth-guard-service';
 import { AuthService } from './auth.service';
 import { DataService } from './data.service';
@@ -21,8 +22,17 @@ import { LoginComponent } from './login/login.component';
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'movies', component: MovieListComponent },
-  { path: 'movies/:id', component: MovieComponent },
+  { 
+    path: 'movies', 
+    component: MovieListComponent,
+  },
+  { 
+    path: 'movies/:id', 
+    component: MovieComponent,
+    children: [
+      { path: 'rating', component: MovieRatingComponent }
+    ] 
+  },
   { 
     path: 'movies/:id/:edit', 
     component: MovieComponent,
@@ -50,7 +60,8 @@ const appRoutes: Routes = [
     FooterComponent,
     MovieComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
+    MovieRatingComponent
   ],
   imports: [
     BrowserModule,

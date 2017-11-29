@@ -3,6 +3,7 @@ export class Movie {
     public title: string;
     public director: string;
     public runtime: number;
+    public ratings: number[];
 
     constructor() {}
 }

@@ -1,3 +1,4 @@
+import { MovieRatingComponent } from './../movie-rating/movie-rating.component';
 import { DataService } from './../data.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Movie } from '../movie';
