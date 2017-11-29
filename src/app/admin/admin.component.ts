@@ -42,6 +42,10 @@ export class AdminComponent implements OnInit {
     this.movies.splice(index, 1);
   }
 
+  editMovie(movie) {
+    this.router.navigate(['movies/', movie.id, 'edit']);
+  }
+
   ngOnInit() {
 
   }

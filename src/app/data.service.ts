@@ -17,8 +17,4 @@ export class DataService {
     public getMovie(id: string): Movie {
         return this.movies.find(x => x.id === id);
     }
-
-    // public createNewBeanie(): Beanie {
-    //   return new Beanie('', undefined, '');
-    // }
 }

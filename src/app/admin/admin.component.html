@@ -1,16 +1,5 @@
 
-<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
-
-<!-- <h2>Edit</h2>
-<form #editForm="ngForm" (ngSubmit)="updateMovie()">
-  <input class="input" type="text" name="title" placeholder="Title" required minlength="1" [ngModel]="(movie | async)?.title" #movieTitle="ngModel">
-  <input class="input" type="text" name="director" placeholder="Director" required minlength="1" [ngModel]="(movie | async)?.director" #movieDirector="ngModel">
-  <input class="input" type="number" name="runtime" placeholder="Runtime" required minlength="1" [ngModel]="(movie | async)?.runtime" #movieRuntime="ngModel">
-  <button type="submit" class="button is-link">Save</button>
-</form>
-
-<hr> -->
-
+<!-- <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner> -->
 
 <h2 class="title is-2">List of movies</h2>
 
@@ -25,10 +14,10 @@
   </thead>
   <tbody>
     <tr *ngFor="let movie of movies">
-      <th>{{ movie.title }} <a class="delete" (click)="deleteMovie(movie)"></a></th>
+      <th><span id="e2e-title">{{ movie.title }}</span> <a class="delete" (click)="deleteMovie(movie)"></a></th>
       <td>{{ movie.director }}</td>
       <td>{{ movie.runtime }}</td>
-      <!-- <td><a (click)="editMovie(movie.id)">Edit</a></td> -->
+      <td><a id="e2e-edit" (click)="editMovie(movie)">Edit</a></td>
     </tr>
   </tbody>
 </table>
@@ -40,7 +29,7 @@
   <div class="field">
     <label class="label">Title</label>
     <div class="control has-icons-right">
-      <input class="input" type="text" name="title" placeholder="Title" required minlength="1" [(ngModel)]="title" #movieTitle="ngModel">
+      <input class="input" id="title" type="text" name="title" placeholder="Title" required minlength="1" [(ngModel)]="title" #movieTitle="ngModel">
       <div *ngIf="(movieTitle.dirty || movieTitle.touched)">
         <span class="icon is-small is-right">
           <i *ngIf="!movieForm.value.title" class="fa fa-warning"></i>
@@ -53,7 +42,7 @@
   <div class="field">
     <label class="label">Director</label>
     <div class="control has-icons-right">
-      <input class="input" id="create-director" type="text" name="director" placeholder="Director" required minlength="1" [(ngModel)]="director" #movieDirector="ngModel">
+      <input class="input" id="director" type="text" name="director" placeholder="Director" required minlength="1" [(ngModel)]="director" #movieDirector="ngModel">
       <div *ngIf="(movieDirector.dirty || movieDirector.touched)">
         <span class="icon is-small is-right">
           <i *ngIf="!movieForm.value.director" class="fa fa-warning"></i>
@@ -66,7 +55,7 @@
   <div class="field">
     <label class="label">Runtime</label>
     <div class="control has-icons-right">
-      <input class="input" id="create-runtime" type="number" name="runtime" placeholder="Runtime" required minlength="1" [(ngModel)]="runtime" #movieRuntime="ngModel">
+      <input class="input" id="runtime" type="number" name="runtime" placeholder="Runtime" required minlength="1" [(ngModel)]="runtime" #movieRuntime="ngModel">
       <div *ngIf="(movieRuntime.dirty || movieRuntime.touched)">
         <span class="icon is-small is-right">
           <i *ngIf="!movieForm.value.runtime" class="fa fa-warning"></i>
@@ -78,10 +67,7 @@
 
   <div class="field is-grouped">
     <div class="control">
-      <button type="submit" class="button is-link" [disabled]="!movieForm.form.valid">Add movie</button>
-    </div>
-    <div class="control">
-      <button id="add-movie" class="button is-text" (click)="movieForm.reset()">Start over</button>
+      <button id="add-movie" type="submit" class="button is-link" [disabled]="!movieForm.form.valid">Add movie</button>
     </div>
   </div>
 

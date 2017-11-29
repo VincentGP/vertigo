@@ -1,9 +1,9 @@
+import { AuthGuard } from './auth-guard-service';
+import { AuthService } from './auth.service';
 import { DataService } from './data.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -16,13 +16,24 @@ import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './ui/footer/footer.component';
 import { MovieComponent } from './movie/movie.component';
 import { AdminComponent } from './admin/admin.component';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'movies', component: MovieListComponent },
   { path: 'movies/:id', component: MovieComponent },
-  { path: 'admin', component: AdminComponent },
+  { 
+    path: 'movies/:id/:edit', 
+    component: MovieComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'admin', 
+    component: AdminComponent,
+    canActivate: [AuthGuard] 
+  },
+  { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/movies', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
@@ -38,20 +49,21 @@ const appRoutes: Routes = [
     AboutComponent,
     FooterComponent,
     MovieComponent,
-    AdminComponent
+    AdminComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebase, 'vertigo'), // imports firebase/app needed for everything
-    AngularFirestoreModule, // imports firebase/firestore, only needed for database features,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }
     )
   ],
   providers: [
-    DataService
+    DataService,
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
