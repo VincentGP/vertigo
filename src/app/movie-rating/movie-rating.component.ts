@@ -22,7 +22,7 @@ export class MovieRatingComponent implements OnInit {
       this.movie = data.getMovie('con-air');
     });
   }
-  average(arr): number {
+  average(arr: number[]): number {
     return arr.reduce((p, c) => p + c, 0) / arr.length;
   }
   

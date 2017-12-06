@@ -18,6 +18,9 @@ import { FooterComponent } from './ui/footer/footer.component';
 import { MovieComponent } from './movie/movie.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
+import { NewsComponent } from './news/news.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { NewsService } from './news.service';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -37,6 +40,10 @@ const appRoutes: Routes = [
     path: 'movies/:id/:edit', 
     component: MovieComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'news',
+    component: NewsComponent
   },
   { 
     path: 'admin', 
@@ -61,7 +68,8 @@ const appRoutes: Routes = [
     MovieComponent,
     AdminComponent,
     LoginComponent,
-    MovieRatingComponent
+    MovieRatingComponent,
+    NewsComponent
   ],
   imports: [
     BrowserModule,
@@ -69,12 +77,14 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }
-    )
+    ),
+    HttpClientModule
   ],
   providers: [
     DataService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    NewsService
   ],
   bootstrap: [AppComponent]
 })
