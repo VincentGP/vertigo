@@ -1,9 +1,12 @@
 export class Movie {
-    public id: string;
-    public title: string;
+    public _id: string;
+    private customerId: string;
     public director: string;
-    public runtime: number;
+    public cast: string[];
+    public releaseYear: Date;
     public ratings: number[];
 
-    constructor() {}
+    constructor(public title: string, public runtime: number) {
+        this.customerId = '24';
+    }
 }

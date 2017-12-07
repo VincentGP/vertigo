@@ -14,4 +14,17 @@ export class NewsService {
     let url = 'https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=c1c0ec9ab586453aba7d160da8c82d47';
     return this.http.get(url).map(data => data);
   }
+  
+  public testPost(message) {
+    this.http.post('http://angular2api1.azurewebsites.net/api/internships/create', {TEST: message},
+      { responseType: 'text' }) // This api sends back text.
+      .subscribe(data => {
+        console.log(data);
+      })
+  }
+
+  public deletePost(id) {
+    this.http.delete('http://angular2api1.azurewebsites.net/api/internships/delete', id);
+  }
+
 }

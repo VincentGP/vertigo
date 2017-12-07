@@ -23,36 +23,44 @@ export class AdminComponent implements OnInit {
   // showSpinner: boolean = false;
 
   constructor(private router: Router, private data: DataService) {
-    this.movie = new Movie();
-    this.movies = this.data.movies;
+    this.movie = new Movie('', null);
+    data.getMovies().subscribe(data => {
+      this.movies = data;
+    });
   }
 
-  addMovie(form: FormArray) {
+
+
+  public addMovie(movie: Movie) {
+
+    this.data.createMovie(movie);
     // If the form is valid
-    if (form.status == "VALID") {
-      // Create id based on title
-      let id = this.title.replace(/\s+/g, '-').toLowerCase();
-      // Set the values
-      this.movie.id = id;
-      this.movie.title = this.title;
-      this.movie.director = this.director;
-      this.movie.runtime = this.runtime;
-      // Push to our data service
-      this.data.movies.push(this.movie);
-    } else {
-      alert('The form isn\'t valid');
-    }
+    // if (form.status == "VALID") {
+    //   // // Create id based on title
+    //   // let id = this.title.replace(/\s+/g, '-').toLowerCase();
+    //   // // Set the values
+    //   // this.movie._id = id;
+    //   // this.movie.title = this.title;
+    //   // this.movie.director = this.director;
+    //   // this.movie.runtime = this.runtime;
+    //   // // Push to our data service
+    //   // this.data.movies.push(this.movie);
+    // } else {
+    //   alert('The form isn\'t valid');
+    // }
   }
 
-  deleteMovie(movie) {
+  public deleteMovie(movie: Movie) {
     if (window.confirm("Are you sure?")) {
-      let index = this.movies.findIndex(model => model.id === movie.id);
+      this.data.deleteMovie(movie);
+      // Remove from the DOM even though we haven't received any response
+      let index = this.movies.findIndex(model => model._id === movie._id);
       this.movies.splice(index, 1);
     }
   }
 
   editMovie(movie) {
-    this.router.navigate(['movies/', movie.id, 'edit']);
+    this.router.navigate(['movies/', movie._id, 'edit']);
   }
 
   ngOnInit() {

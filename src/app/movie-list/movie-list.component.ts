@@ -2,6 +2,7 @@ import { DataService } from './../data.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Movie } from '../movie';
 import { Router } from '@angular/router';
+import { Observable } from "rxjs";
 
 
 @Component({
@@ -13,11 +14,20 @@ import { Router } from '@angular/router';
 export class MovieListComponent implements OnInit {
 
   public movies: Movie[];
+  public movie: Movie;
 
   // showSpinner: boolean = true;
 
   constructor(private router: Router, private data: DataService) {
-    this.movies = data.movies;
+    data.getMovies().subscribe(movies => {
+      this.movies = movies;
+      console.log(this.movies);
+    });
+
+    this.movie = new Movie('Con Air', 110);
+
+    // data.createMovie(this.movie);
+
   }
 
   navigateToMovie(id) {

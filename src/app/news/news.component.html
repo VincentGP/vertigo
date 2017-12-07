@@ -1,3 +1,25 @@
-<div *ngFor="let article of articles">
-  {{ article?.title }}
+<div class="card column is-half" *ngFor="let article of articles">
+  <div class="card-image">
+    <figure class="image is-4by3">
+      <img [src]="article.urlToImage">
+    </figure>
+  </div>
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-48x48">
+          <img src="https://images-na.ssl-images-amazon.com/images/M/MV5BNjYxNDg3NDA4NF5BMl5BanBnXkFtZTgwNzU4MTE3MjI@._CR221,223,578,578_UX402_UY402._SY201_SX201_AL_.jpg" alt="Placeholder image">
+        </figure>
+      </div>
+      <div class="media-content">
+        <p class="title is-4">{{ article?.author }}</p>
+      </div>
+    </div>
+    <div class="content">
+      <p><strong>{{ article?.title }}</strong></p>
+      <p>{{ article?.description }}</p>
+      <br>
+      <time>{{ article?.publishedAt }}</time>
+    </div>
+  </div>
 </div>

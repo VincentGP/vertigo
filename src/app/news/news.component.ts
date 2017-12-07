@@ -19,9 +19,12 @@ export class NewsComponent implements OnInit {
       this.articles = this.news.articles;
       console.log(this.news);
     });
+    // data.testPost('ANOTHER TEST ✌️');
+    // data.deletePost('5a285313f1a3df48390345f1');
   }
   
   ngOnInit() {
+    
   }
 
 }

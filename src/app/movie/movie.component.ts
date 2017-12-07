@@ -32,7 +32,7 @@ export class MovieComponent implements OnInit {
     });
     
     // Hent film baseret på id
-    this.movie = data.movies.find(model => model.id === this.id);
+    this.movie = data.movies.find(model => model._id === this.id);
     
   }
 
@@ -41,7 +41,7 @@ export class MovieComponent implements OnInit {
     // If the form is valid
     if (form.status == "VALID") {
       // Find the index in the array where the id matches
-      let index = this.movies.findIndex(model => model.id === id);
+      let index = this.movies.findIndex(model => model._id === id);
       this.movie.title = title;
       this.movie.director = director;
       this.movie.runtime = runtime;

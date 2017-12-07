@@ -24,12 +24,12 @@
 
 <h2 class="title is-2">Create movie</h2>
 
-<form #movieForm="ngForm" (ngSubmit)="addMovie(movieForm.form);">
+<form #movieForm="ngForm" (ngSubmit)="addMovie(movie);">
 
   <div class="field">
     <label class="label">Title</label>
     <div class="control has-icons-right">
-      <input class="input" id="title" type="text" name="title" placeholder="Title" required minlength="1" [(ngModel)]="title" #movieTitle="ngModel">
+      <input class="input" id="title" type="text" name="title" placeholder="Title" required minlength="1" [(ngModel)]="movie.title" #movieTitle="ngModel">
       <div *ngIf="(movieTitle.dirty || movieTitle.touched)">
         <span class="icon is-small is-right">
           <i *ngIf="!movieForm.value.title" class="fa fa-warning"></i>
@@ -42,7 +42,7 @@
   <div class="field">
     <label class="label">Director</label>
     <div class="control has-icons-right">
-      <input class="input" id="director" type="text" name="director" placeholder="Director" required minlength="1" [(ngModel)]="director" #movieDirector="ngModel">
+      <input class="input" id="director" type="text" name="director" placeholder="Director" required minlength="1" [(ngModel)]="movie.director" #movieDirector="ngModel">
       <div *ngIf="(movieDirector.dirty || movieDirector.touched)">
         <span class="icon is-small is-right">
           <i *ngIf="!movieForm.value.director" class="fa fa-warning"></i>
@@ -55,7 +55,7 @@
   <div class="field">
     <label class="label">Runtime</label>
     <div class="control has-icons-right">
-      <input class="input" id="runtime" type="number" name="runtime" placeholder="Runtime" required minlength="1" [(ngModel)]="runtime" #movieRuntime="ngModel">
+      <input class="input" id="runtime" type="number" name="runtime" placeholder="Runtime" required minlength="1" [(ngModel)]="movie.runtime" #movieRuntime="ngModel">
       <div *ngIf="(movieRuntime.dirty || movieRuntime.touched)">
         <span class="icon is-small is-right">
           <i *ngIf="!movieForm.value.runtime" class="fa fa-warning"></i>
