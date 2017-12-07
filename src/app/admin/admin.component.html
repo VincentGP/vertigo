@@ -1,31 +1,32 @@
 
-<!-- <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner> -->
-
 <h2 class="title is-2">List of movies</h2>
 
-<table class="table is-fullwidth">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Director</th>
-      <th>Runtime</th>
-      <th>Edit</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let movie of movies">
-      <th><span id="e2e-title">{{ movie.title }}</span> <a class="delete" (click)="deleteMovie(movie)"></a></th>
-      <td>{{ movie.director }}</td>
-      <td>{{ movie.runtime }}</td>
-      <td><a id="e2e-edit" (click)="editMovie(movie)">Edit</a></td>
-    </tr>
-  </tbody>
-</table>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+
+<div *ngIf="!isLoading">
+  <table class="table is-fullwidth">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Director</th>
+        <th>Runtime</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movie of movies">
+        <th><span id="e2e-title">{{ movie.title }}</span> <a class="delete" (click)="deleteMovie(movie)"></a></th>
+        <td>{{ movie.director }}</td>
+        <td>{{ movie.runtime }}</td>
+        <td><a id="e2e-edit" (click)="editMovie(movie)">Edit</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <h2 class="title is-2">Create movie</h2>
 
 <form #movieForm="ngForm" (ngSubmit)="addMovie(movie);">
-
   <div class="field">
     <label class="label">Title</label>
     <div class="control has-icons-right">

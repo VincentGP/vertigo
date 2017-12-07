@@ -20,12 +20,13 @@ export class AdminComponent implements OnInit {
   public movies: Movie[];
   public movie: Movie;
 
-  // showSpinner: boolean = false;
+  public isLoading: boolean = true;
 
   constructor(private router: Router, private data: DataService) {
     this.movie = new Movie('', null);
     data.getMovies().subscribe(data => {
       this.movies = data;
+      this.isLoading = false;
     });
   }
 

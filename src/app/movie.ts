@@ -8,5 +8,7 @@ export class Movie {
 
     constructor(public title: string, public runtime: number) {
         this.customerId = '24';
+        this.ratings = [];
+        this.cast = [];
     }
 }

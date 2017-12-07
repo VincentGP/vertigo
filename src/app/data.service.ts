@@ -3,6 +3,7 @@ import { Movie } from './movie';
 import { HttpClient } from "@angular/common/http/";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import 'rxjs/add/operator/map'
 
 @Injectable()
 export class DataService {
@@ -24,7 +25,7 @@ export class DataService {
 
     public createMovie(movie: Movie) {
         this.http.post('http://angular2api1.azurewebsites.net/api/internships/create', movie,
-            { responseType: 'text' }) // This api sends back text.
+            { responseType: 'text' })
             .subscribe(data => {
                 console.log(data);
             })
@@ -40,6 +41,7 @@ export class DataService {
     public getMovie(id: string): Observable<Movie> {
         // Find filmen baseret på id, skal eventuelt laves om da det måske ikke er sikkert der altid er noget i this.movies 
         return this.getMovies().map(data => {
+            console.log(data);
             return data.find(x => x._id === id);
         });  
     }

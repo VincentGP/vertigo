@@ -15,18 +15,18 @@ export class MovieListComponent implements OnInit {
 
   public movies: Movie[];
   public movie: Movie;
-
-  // showSpinner: boolean = true;
+  public showSpinner: boolean = true;
 
   constructor(private router: Router, private data: DataService) {
     data.getMovies().subscribe(movies => {
+      this.showSpinner = false;
       this.movies = movies;
-      console.log(this.movies);
+      // console.log(this.movies);
     });
 
   }
 
-  navigateToMovie(id) {
+  navigateToMovie(id: string) {
     this.router.navigate(['movies/', id]);
   }
 

@@ -19,10 +19,10 @@ export class MovieComponent implements OnInit {
   public movie: Movie;
   public movies: Movie[];
   public editMode: boolean = false;
+  public isLoading: boolean = true;
   
   constructor(private route: ActivatedRoute, private data: DataService, private router: Router) {
-    // Fetch movies from the service
-    this.movies = data.movies; 
+    
     // Få id ud fra url'en
     route.params.subscribe(params => {
       this.id = params['id'];
@@ -33,8 +33,10 @@ export class MovieComponent implements OnInit {
     });
     
     // Hent film baseret på id
-    data.getMovie(this.id).subscribe(data => this.movie = data);
-    
+    data.getMovie(this.id).subscribe(data => {
+      this.movie = data;
+      this.isLoading = false;
+    });
   }
 
   public updateMovie(movie: Movie) {

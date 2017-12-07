@@ -1,4 +1,4 @@
-<!-- <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner> -->
+<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
 
 <div class="column" *ngFor="let movie of movies">
   <a (click)="navigateToMovie(movie._id)">{{ movie.title }}</a>
