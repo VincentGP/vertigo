@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { MovieRatingComponent } from './../movie-rating/movie-rating.component';
 import { DataService } from './../data.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
@@ -32,27 +33,35 @@ export class MovieComponent implements OnInit {
     });
     
     // Hent film baseret på id
-    this.movie = data.movies.find(model => model._id === this.id);
+    data.getMovie(this.id).subscribe(data => this.movie = data);
     
   }
 
-  // TO DO: Gør så metoden bare tager i mod et Movie object i stedet for en masse parametre
-  public save(id: string, title: string, director: string, runtime: number, form: FormArray): void {
-    // If the form is valid
-    if (form.status == "VALID") {
-      // Find the index in the array where the id matches
-      let index = this.movies.findIndex(model => model._id === id);
-      this.movie.title = title;
-      this.movie.director = director;
-      this.movie.runtime = runtime;
-      // Push the modified movie to the movies array
-      this.movies[index] = this.movie;
-      // Navigate
+  public updateMovie(movie: Movie) {
+    this.data.updateMovie(movie);
+    // TO DO: Change this
+    setTimeout(() => {
       this.router.navigate(['admin']);
-    } else {
-      alert('The form isn\'t valid');
-    }
+    }, 1000);      
   }
+
+  // TO DO: Gør så metoden bare tager i mod et Movie object i stedet for en masse parametre
+  // public save(id: string, title: string, director: string, runtime: number, form: FormArray): void {
+  //   // If the form is valid
+  //   if (form.status == "VALID") {
+  //     // Find the index in the array where the id matches
+  //     let index = this.movies.findIndex(model => model._id === id);
+  //     this.movie.title = title;
+  //     this.movie.director = director;
+  //     this.movie.runtime = runtime;
+  //     // Push the modified movie to the movies array
+  //     this.movies[index] = this.movie;
+  //     // Navigate
+  //     this.router.navigate(['admin']);
+  //   } else {
+  //     alert('The form isn\'t valid');
+  //   }
+  // }
   
   ngOnInit() {
   

@@ -34,6 +34,7 @@ export class AdminComponent implements OnInit {
   public addMovie(movie: Movie) {
 
     this.data.createMovie(movie);
+    this.movies.push(movie);
     // If the form is valid
     // if (form.status == "VALID") {
     //   // // Create id based on title

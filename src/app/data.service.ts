@@ -37,7 +37,17 @@ export class DataService {
         });
     }
 
-    public getMovie(id: string): Movie {
-        return this.movies.find(x => x._id === id);
+    public getMovie(id: string): Observable<Movie> {
+        // Find filmen baseret på id, skal eventuelt laves om da det måske ikke er sikkert der altid er noget i this.movies 
+        return this.getMovies().map(data => {
+            return data.find(x => x._id === id);
+        });  
+    }
+
+    public updateMovie(movie: Movie) {
+        let url = 'http://angular2api1.azurewebsites.net/api/internships/update/';
+        this.http.post(url + movie._id, movie, { responseType: 'text' }).subscribe(status => {
+            return status;
+        });
     }
 }

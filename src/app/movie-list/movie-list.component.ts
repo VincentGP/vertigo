@@ -24,10 +24,6 @@ export class MovieListComponent implements OnInit {
       console.log(this.movies);
     });
 
-    this.movie = new Movie('Con Air', 110);
-
-    // data.createMovie(this.movie);
-
   }
 
   navigateToMovie(id) {

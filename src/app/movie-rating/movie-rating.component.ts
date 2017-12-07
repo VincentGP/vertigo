@@ -19,7 +19,7 @@ export class MovieRatingComponent implements OnInit {
     route.params.subscribe(params => {
       this.id = params['id'];
       // Hardcodes for now
-      this.movie = data.getMovie('con-air');
+      // this.movie = data.getMovie('con-air');
     });
   }
   average(arr: number[]): number {
