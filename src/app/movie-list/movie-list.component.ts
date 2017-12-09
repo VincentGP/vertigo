@@ -23,7 +23,6 @@ export class MovieListComponent implements OnInit {
       this.movies = movies;
       // console.log(this.movies);
     });
-
   }
 
   navigateToMovie(id: string) {
