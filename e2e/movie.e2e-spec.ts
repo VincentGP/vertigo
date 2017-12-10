@@ -3,10 +3,15 @@ import { browser, element, by } from "protractor";
 
 // 1.0 create movie succesfully => add new movie to the database
 // 1.1 shows error message when creating invalid movie
+// 1.2 Edit an existing movie
 
 describe('Movie component', () => {
     it('1.0 create movie succesfully', () => {
         browser.get('/admin');
+        element(by.id('e2e-email')).sendKeys('admin');
+        element(by.id('e2e-password')).sendKeys('admin');
+        element(by.id('e2e-login-btn')).click();
+        browser.sleep(4300);
         element.all(by.css('.delete')).then((elemsBefore) => {
             element(by.id('title')).sendKeys('Snake Eyes');
             element(by.id('director')).sendKeys('Brian De Palma');
@@ -20,6 +25,10 @@ describe('Movie component', () => {
     });
     it('1.1 shows error message when creating invalid movie', () => {
         browser.get('/admin');
+        element(by.id('e2e-email')).sendKeys('admin');
+        element(by.id('e2e-password')).sendKeys('admin');
+        element(by.id('e2e-login-btn')).click();
+        browser.sleep(4300);
         element.all(by.css('.delete')).then((elemsBefore) => {
             element(by.id('title')).sendKeys('');
             element(by.id('director')).sendKeys('');

@@ -3,10 +3,18 @@
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
 
 <div *ngIf="!isLoading">
-  <div *ngFor="let movie of movies; let i = index">
-    <div>
-      <p><strong>{{ movie.title }}</strong></p>
-      <p>Average rating: {{ averageRatings[i] }}</p>
+  <div class="columns is-centered">
+    <div class="column" *ngFor="let movie of movies; let i = index">
+      <div>
+        <p class="has-text-centered"><strong>{{ movie.title }}</strong></p>
+        <star-rating-comp 
+          [starType]="'svg'" 
+          [rating]="averageRatings[i]"
+          [disabled]="true"
+          [showHalfStars]="true">
+        </star-rating-comp>
+        <p class="has-text-centered">Average rating of: {{ averageRatings[i] }}</p>
+      </div>
     </div>
   </div>
 </div>

@@ -2,6 +2,7 @@
 
 <div *ngIf="!isLoading">
 	<div *ngIf="!editMode">
+		<p>Rate the movie 🏆</p>
 		<star-rating-comp 
 			(onClick)="onClick($event)" 
 			[starType]="'svg'"

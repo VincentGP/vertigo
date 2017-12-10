@@ -18,8 +18,7 @@ export class DataService {
         let url = 'http://angular2api1.azurewebsites.net/api/internships/getall';
         return this.http.get(url).pipe(
             map((data: any[]) => {
-                this.movies = data.filter(x => x.customerId === '24');
-                return this.movies;
+                return data.filter(x => x.customerId === '24');
             }));
     }
 
