@@ -1,4 +1,3 @@
-import { MovieRatingComponent } from './movie-rating/movie-rating.component';
 import { AuthGuard } from './auth-guard-service';
 import { AuthService } from './auth.service';
 import { DataService } from './data.service';
@@ -20,6 +19,8 @@ import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+import { StarRatingModule } from 'angular-star-rating';
+
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
@@ -30,9 +31,6 @@ const appRoutes: Routes = [
   { 
     path: 'movies/:id', 
     component: MovieComponent,
-    children: [
-      { path: 'rating', component: MovieRatingComponent }
-    ] 
   },
   { 
     path: 'movies/:id/:edit', 
@@ -62,7 +60,6 @@ const appRoutes: Routes = [
     MovieComponent,
     AdminComponent,
     LoginComponent,
-    MovieRatingComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +68,8 @@ const appRoutes: Routes = [
       appRoutes,
       { enableTracing: false }
     ),
-    HttpClientModule
+    HttpClientModule,
+    StarRatingModule.forRoot()
   ],
   providers: [
     DataService,

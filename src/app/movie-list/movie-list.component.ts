@@ -21,7 +21,6 @@ export class MovieListComponent implements OnInit {
     data.getMovies().subscribe(movies => {
       this.showSpinner = false;
       this.movies = movies;
-      // console.log(this.movies);
     });
   }
 

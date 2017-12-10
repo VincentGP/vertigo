@@ -1,6 +1,29 @@
-<h2 class="is-large">LOGIN</h2>
-<app-loading-spinner *ngIf="loader"></app-loading-spinner>
-<p *ngIf="!loader">
-  <button (click)="login()" *ngIf="!authService.isLoggedIn">Login</button>
-  <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
-</p>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+
+<section class="hero" *ngIf="!isLoading">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="column is-6">
+        <h3 class="title has-text-grey">Login</h3>
+        <div class="box">
+          <form #loginForm="ngForm">
+            <div class="field">
+              <div class="control">
+                <input class="input is-large" type="email" placeholder="Your Email" autofocus="" name="email" [(ngModel)]="username" required>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <input class="input is-large" type="password" placeholder="Your Password" name="password" [(ngModel)]="password" required>
+              </div>
+            </div>
+            <a class="button is-block is-info is-large" (click)="login()">Login</a>
+          </form>
+        </div>
+        <p class="has-text-grey">
+          <a (click)="hint()">Pssst. Get hint.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,11 +1,16 @@
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+
 <div *ngIf="!isLoading">
 	<div *ngIf="!editMode">
+		<star-rating-comp 
+			(onClick)="onClick($event)" 
+			[starType]="'svg'"
+			[hoverEnabled]="true"
+			[disabled]="ratingSubmitted">
+		</star-rating-comp>
 		<strong>Title: </strong><p>{{ movie?.title }}</p>
 		<strong>Director:</strong><p>{{ movie?.director }}</p>
 		<strong>Runtime:</strong><p>{{ movie?.runtime }}</p>
-		<a [routerLink]="['rating']">See movie rating</a>
-		<router-outlet></router-outlet>
 	</div>
 
 	<div *ngIf="editMode">

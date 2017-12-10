@@ -10,29 +10,37 @@ import { AuthService } from '../auth.service';
 })
 
 export class LoginComponent {
-  // Used for displaying status
-  message: string;
 
-  loader: boolean = false;
+  public username: string;
+  public password: string;
+
+  isLoading: boolean = false;
 
   constructor(public authService: AuthService, public router: Router) { }
 
   login() {
-    this.loader = true;
-    this.authService.login().subscribe(() => {
+    this.isLoading = true;
+    this.authService.login(this.username, this.password).subscribe(() => {
       if (this.authService.isLoggedIn) {
-        this.loader = false;
+        this.isLoading = false;
         // Get the redirect URL from our auth service
         // If no redirect has been set, use the default
         let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
 
         // Redirect the user
         this.router.navigate([redirect]);
+      } else {
+        this.isLoading = false;
+        alert('The email or password was wrong. Please try again!');
       }
     });
   }
 
   logout() {
     this.authService.logout();
+  }
+
+  public hint(): void {
+    alert('Email: \'admin\' Password: \'admin\'');
   }
 }

@@ -1,3 +1,12 @@
-<p>
-  home works!
-</p>
+<h2 class="title is-2">Movies</h2>
+
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+
+<div *ngIf="!isLoading">
+  <div *ngFor="let movie of movies; let i = index">
+    <div>
+      <p><strong>{{ movie.title }}</strong></p>
+      <p>Average rating: {{ averageRatings[i] }}</p>
+    </div>
+  </div>
+</div>

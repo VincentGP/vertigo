@@ -1,5 +1,10 @@
+<h2 class="title is-2">Movies</h2>
+<p>Here you are able to see a list of every movie. Click on the movie for more information ✌️</p>
+
 <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
 
-<div class="column" *ngFor="let movie of movies">
-  <a (click)="navigateToMovie(movie._id)">{{ movie.title }}</a>
+<div *ngIf="!showSpinner">
+  <div class="column" *ngFor="let movie of movies">
+    <a (click)="navigateToMovie(movie._id)">{{ movie.title }}</a>
+  </div>
 </div>
