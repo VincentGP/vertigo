@@ -1,3 +1,4 @@
+import { ChildBComponent } from './child-b/child-b.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
@@ -8,10 +9,24 @@ import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ChildAComponent } from './child-a/child-a.component';
 
 const appRoutes: Routes = [
 	{ path: 'home', component: HomeComponent },
-	{ path: 'about', component: AboutComponent },
+	{ 
+		path: 'about', 
+		component: AboutComponent,
+		children: [
+			{
+				path: 'childa',
+				component: ChildAComponent
+			},
+			{
+				path: 'childb',
+				component: ChildBComponent
+			}
+		] 
+	},
 	{
 		path: 'movies',
 		component: MovieListComponent,

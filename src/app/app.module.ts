@@ -21,6 +21,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { StarRatingModule } from 'angular-star-rating';
 
 import { AppRoutingModule } from './app-routing.module';
+import { ChildAComponent } from './child-a/child-a.component';
+import { ChildBComponent } from './child-b/child-b.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { AppRoutingModule } from './app-routing.module';
     MovieComponent,
     AdminComponent,
     LoginComponent,
+    ChildAComponent,
+    ChildBComponent,
   ],
   imports: [
     BrowserModule,

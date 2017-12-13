@@ -26,7 +26,7 @@
 
 <h2 class="title is-2">Create movie</h2>
 
-<form #movieForm="ngForm" (ngSubmit)="addMovie(movie);">
+<form #movieForm="ngForm" (ngSubmit)="addMovie(movie, movieForm);">
   <div class="field">
     <label class="label">Title</label>
     <div class="control has-icons-right">
