@@ -46,6 +46,7 @@ const appRoutes: Routes = [
 		canActivate: [AuthGuard]
 	},
 	{ path: 'login', component: LoginComponent },
+	// A redirect route requires a pathMatch property to tell the router how to match a URL to the path of a route. The router throws an error if you don't. Only when the entire url matches ''.
 	{ path: '', redirectTo: '/movies', pathMatch: 'full' },
 	{ path: '**', component: PageNotFoundComponent }
 ];

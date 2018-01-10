@@ -20,12 +20,12 @@
 			<div class="field">
 				<label class="label">Title</label>
 				<div class="control has-icons-right">
-					<input class="input" id="title" type="text" name="title" placeholder="Title" required minlength="1" [ngModel]="movie?.title" (ngModelChange)="movie.title=$event" #movieTitle>
+					<input class="input" id="title" type="text" name="title" placeholder="Title" required minlength="1" [(ngModel)]="movie.title" #movieTitle="ngModel">
 					<div *ngIf="(movieTitle.dirty || movieTitle.touched)">
 						<span class="icon is-small is-right">
-							<i *ngIf="!movie.title" class="fa fa-warning"></i>
+							<i *ngIf="!editForm.value.title" class="fa fa-warning"></i>
 						</span>
-						<p *ngIf="!movie.title" class="help is-danger">Title is required</p>
+						<p *ngIf="!editForm.value.title" class="help is-danger">Title is required</p>
 					</div>
 				</div>
 			</div>
@@ -33,13 +33,12 @@
 			<div class="field">
 				<label class="label">Director</label>
 				<div class="control has-icons-right">
-					<input class="input" id="director" type="text" name="director" placeholder="Director" required minlength="1" [ngModel]="movie?.director" (ngModelChange)="movie.director=$event"
-					#movieDirector>
+					<input class="input" id="director" type="text" name="director" placeholder="Director" required minlength="1" [(ngModel)]="movie.director"	#movieDirector="ngModel">
 					<div *ngIf="(movieDirector.dirty || movieDirector.touched)">
 						<span class="icon is-small is-right">
-							<i *ngIf="!movie.director" class="fa fa-warning"></i>
+							<i *ngIf="!editForm.value.director" class="fa fa-warning"></i>
 						</span>
-						<p *ngIf="!movie.director" class="help is-danger">Director is required</p>
+						<p *ngIf="!editForm.value.director" class="help is-danger">Director is required</p>
 					</div>
 				</div>
 			</div>
@@ -47,18 +46,17 @@
 			<div class="field">
 				<label class="label">Runtime</label>
 				<div class="control has-icons-right">
-					<input class="input" id="runtime" type="number" name="runtime" placeholder="Runtime" required minlength="1" [ngModel]="movie?.runtime" (ngModelChange)="movie.runtime=$event"
-					#movieRuntime>
+					<input class="input" id="runtime" type="number" name="runtime" placeholder="Runtime" required minlength="1" [(ngModel)]="movie.runtime" #movieRuntime="ngModel">
 					<div *ngIf="(movieRuntime.dirty || movieRuntime.touched)">
 						<span class="icon is-small is-right">
-							<i *ngIf="!movie.runtime" class="fa fa-warning"></i>
+							<i *ngIf="!editForm.value.runtime" class="fa fa-warning"></i>
 						</span>
-						<p *ngIf="!movie.runtime" class="help is-danger">Runtime is required</p>
+						<p *ngIf="!editForm.value.runtime" class="help is-danger">Runtime is required</p>
 					</div>
 				</div>
 			</div>
 
-			<button id="update-movie" type="submit" class="button is-link">Save</button>
+			<button id="update-movie" type="submit" class="button is-link" [disabled]="!editForm.form.valid">Save</button>
 			<a routerLink="/admin" class="button">Cancel</a>
 
 		</form>

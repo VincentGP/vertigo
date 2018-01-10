@@ -11,18 +11,14 @@ import { Form } from '@angular/forms';
   encapsulation: ViewEncapsulation.None
 })
 export class AdminComponent implements OnInit {
-
-  public title: string;
-  public director: string;
-  public runtime: number;
-
+  
+  // For storing all movies
   public movies: Movie[];
-  public movie: Movie;
-
+  // For storing movie if user wants to add a new movie
+  public movie: Movie = new Movie();
   public isLoading: boolean = true;
 
   constructor(private router: Router, private data: DataService) {
-    this.movie = new Movie('', null);
     data.getMovies().subscribe(data => {
       this.movies = data;
       this.isLoading = false; 
@@ -34,7 +30,7 @@ export class AdminComponent implements OnInit {
       this.data.createMovie(movie);
       this.movies.push(movie);
     } else {
-      alert('The form wasn\'t valid.');
+      alert('The form isn\'t valid. Please try again 💪');
     }
   }
 
@@ -47,6 +43,7 @@ export class AdminComponent implements OnInit {
     }
   }
 
+  // Logic is in movie component
   editMovie(movie) {
     this.router.navigate(['movies/', movie._id, 'edit']);
   }
